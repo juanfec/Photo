@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/button_background_withe_border_black.xml" value="0.4859375" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4859375" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3416666666666667" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_bienvenida.xml" value="0.5" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_bienvenida2.xml" value="0.25" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_registro.xml" value="0.26766304347826086" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_test.xml" value="0.3233695652173913" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_dashboard.xml" value="0.3070652173913043" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.46041666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
