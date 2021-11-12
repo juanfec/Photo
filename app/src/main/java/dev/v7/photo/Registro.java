@@ -19,13 +19,18 @@ import android.view.WindowInsets;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import dev.v7.photo.databinding.ActivityRegistroBinding;
+import dev.v7.photo.persistence.entidades.Usuario;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -52,6 +57,7 @@ public class Registro extends AppCompatActivity {
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private FirebaseAuth autentificador;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -130,9 +136,11 @@ public class Registro extends AppCompatActivity {
         binding.ButtonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.ButtonRegistrarse.setEnabled(false);
                 String usuario = binding.editTextTextEmailAddress2Registrarse.getText().toString();
                 String contraseña = binding.editTextTextPasswordRegistrarse.getText().toString();
-                if(usuario.isEmpty()||contraseña.isEmpty()){
+                String nombre = binding.NombreRegistro.getText().toString();
+                if(usuario.isEmpty()||contraseña.isEmpty()||nombre.isEmpty()){
                     Snackbar.make(v,R.string.usuarioOContraseñaInvalido,Snackbar.LENGTH_LONG).show();
                 }else {
                     autentificador.createUserWithEmailAndPassword(usuario, contraseña)
@@ -143,13 +151,32 @@ public class Registro extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
                                         FirebaseUser user = autentificador.getCurrentUser();
-                                        Snackbar.make(v,user.getUid(),Snackbar.LENGTH_LONG).show();
+                                        String uId = user.getUid();
+                                        Usuario userCreado = new Usuario(uId,nombre,usuario);
+                                        db.collection("usuarios").add(userCreado)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                        Intent login = new Intent(Registro.this,Login.class);
+                                                        startActivity(login);
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error adding document", e);
+                                                        Snackbar.make(v,R.string.errorRegistro,Snackbar.LENGTH_LONG).show();
+                                                    }
+                                                });
+
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                         Toast.makeText(getApplicationContext(), "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
-                                        Snackbar.make(v,"no se loggeo",Snackbar.LENGTH_LONG).show();
+                                        Snackbar.make(v,R.string.errorRegistro,Snackbar.LENGTH_LONG).show();
+                                        binding.ButtonRegistrarse.setEnabled(true);
                                     }
 
 

@@ -13,5 +13,10 @@
     <string name="title_activity_registro">Registro</string>
     <string name="emailEjemplo">juan@correo.com</string>
     <string name="contraseña">Contraseña</string>
-    <string name="usuarioOContraseñaInvalido">Usuario o contraseña invalido</string>
+    <string name="usuarioOContraseñaInvalido">Usuario, nombre o contraseña invalido</string>
+    <string name="nombre">Nombre</string>
+    <string name="errorRegistro">Error creando usuario en bd contacte administrador</string>
+    <string name="logout">Log out</string>
+    <string name="menu">Menu</string>
+    <string name="perfil">Perfil</string>
 </resources>
