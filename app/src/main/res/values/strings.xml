@@ -19,4 +19,8 @@
     <string name="logout">Log out</string>
     <string name="menu">Menu</string>
     <string name="perfil">Perfil</string>
+    <string name="ir_ar_mapas">Ir a Mapas</string>
+    <string name="mapa">Mapa</string>
+    <string name="resumen">Resumen</string>
+    <string name="agregarFoto">Agregar Foto</string>
 </resources>

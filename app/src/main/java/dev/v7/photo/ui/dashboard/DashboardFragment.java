@@ -1,8 +1,13 @@
 package dev.v7.photo.ui.dashboard;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +21,21 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import dev.v7.photo.R;
 import dev.v7.photo.databinding.FragmentDashboardBinding;
@@ -32,6 +47,9 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private FirebaseAuth autentificador;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef ;
+    private StorageReference carpetaImagen ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +59,10 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         autentificador = FirebaseAuth.getInstance();
+
+        storageRef = storage.getReference();
+        carpetaImagen = storageRef.child("imagenesDePerfil");
+
 
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -52,6 +74,52 @@ public class DashboardFragment extends Fragment {
         binding.botonLogout.setOnClickListener(v -> {
             autentificador.signOut();
         });
+
+        binding.agregarFotoBoton.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, 1);
+        });
+        return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            try {
+                // Do whatever you want with this bitmap (image)
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                Log.i("Image Path", selectedImage.getPath());
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data2 = baos.toByteArray();
+
+                UploadTask uploadTask = carpetaImagen.child(autentificador.getUid()).putBytes(data2);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                        // ...
+                        Snackbar.make(getActivity(),getView(),"subido con exito",Snackbar.LENGTH_LONG).show();
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         db.collection("usuarios").whereEqualTo("id", autentificador.getUid()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -68,8 +136,6 @@ public class DashboardFragment extends Fragment {
                         }
                     }
                 });
-
-        return root;
     }
 
     @Override

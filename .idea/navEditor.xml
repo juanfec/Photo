@@ -13,9 +13,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-170" />
-                            <option name="y" value="-665" />
+                            <option name="x" value="-331" />
+                            <option name="y" value="-731" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_mapsFragment_to_navigation_home">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -46,8 +55,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="378" />
-                            <option name="y" value="33" />
+                            <option name="x" value="-363" />
+                            <option name="y" value="640" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -58,8 +67,20 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="55" />
-                            <option name="y" value="21" />
+                            <option name="x" value="122" />
+                            <option name="y" value="22" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="resumen_diario">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="556" />
+                            <option name="y" value="-280" />
                           </Point>
                         </option>
                       </LayoutPositions>

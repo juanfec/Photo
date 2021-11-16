@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +40,9 @@ public class HomeFragment extends Fragment {
         getUser();
         TextView textView = binding.textHome;
         textView.setText(name);
+        binding.irAMapas.setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_mapsFragment);
+        });
         //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
         //    @Override
         //    public void onChanged(@Nullable String s) {
