@@ -128,8 +128,9 @@ public class DashboardFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 Usuario usuario = document.toObject(Usuario.class);
-                                binding.nombrePerfil.setText(usuario.getNombre());
-                                binding.correoPerfil.setText(usuario.getCorreo());
+                                    binding.nombrePerfil.setText(usuario.getNombre());
+                                    binding.correoPerfil.setText(usuario.getCorreo());
+
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -137,6 +138,9 @@ public class DashboardFragment extends Fragment {
                     }
                 });
     }
+
+
+
 
     @Override
     public void onDestroyView() {

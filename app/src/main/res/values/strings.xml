@@ -23,4 +23,6 @@
     <string name="mapa">Mapa</string>
     <string name="resumen">Resumen</string>
     <string name="agregarFoto">Agregar Foto</string>
+    <string name="nombreEjemplo">Juan Rueda</string>
+    <string name="ejemploarroba">\@juanrueda</string>
 </resources>
