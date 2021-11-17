@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,10 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private FirebaseAuth mAuth;
     private String name;
+    private String [] arrayNombres = {"Juan Rueda","rueda","tres"};
+    private String [] arrayArrobas = {"@JuanRueda","@rueda","@tres"};
+    private RecyclerView recyclerViewHome;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -38,11 +44,16 @@ public class HomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         getUser();
-        TextView textView = binding.textHome;
-        textView.setText(name);
+
         binding.irAMapas.setOnClickListener(v -> {
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_mapsFragment);
         });
+        recyclerViewHome = binding.recyclerViewHome;
+        AdapterHome adapterHome = new AdapterHome(getContext(),arrayNombres,arrayArrobas);
+        recyclerViewHome.setAdapter(adapterHome);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewHome.setLayoutManager(linearLayoutManager);
+
         //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
         //    @Override
         //    public void onChanged(@Nullable String s) {
