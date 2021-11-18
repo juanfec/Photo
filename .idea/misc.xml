@@ -14,8 +14,11 @@
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_test.xml" value="0.3233695652173913" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_notifications.xml" value="0.3104166666666667" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_resumen.xml" value="0.43976449275362317" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_vista_photo_individual.xml" value="0.33" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/tarjetaphoto.xml" value="0.5" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/vista_photo_individual_con_binding_fragment.xml" value="0.246875" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.46041666666666664" />
       </map>
     </option>

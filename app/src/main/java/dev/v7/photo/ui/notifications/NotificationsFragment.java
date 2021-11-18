@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import dev.v7.photo.R;
 import dev.v7.photo.databinding.FragmentNotificationsBinding;
+import dev.v7.photo.persistence.DBHelper;
 
 public class NotificationsFragment extends Fragment {
 
@@ -29,6 +31,14 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
+        binding.enviarDatosSqlite.setOnClickListener(v -> {
+            if(binding.nombreEditarSqlite.getText().toString().isEmpty()||binding.arrobaEditarSqlite.getText().toString().isEmpty()){
+                Toast.makeText(getContext(), "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
+            }else{
+                DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
+                dbHelper.addPhoto(binding.nombreEditarSqlite.getText().toString(),binding.arrobaEditarSqlite.getText().toString());
+            }
+        });
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

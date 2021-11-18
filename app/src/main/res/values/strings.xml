@@ -25,4 +25,9 @@
     <string name="agregarFoto">Agregar Foto</string>
     <string name="nombreEjemplo">Juan Rueda</string>
     <string name="ejemploarroba">\@juanrueda</string>
+    <string name="arroba">Arroba</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="guardar">Guardar</string>
+    <string name="editarFoto">Editar Foto</string>
 </resources>

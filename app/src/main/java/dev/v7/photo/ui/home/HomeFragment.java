@@ -1,5 +1,6 @@
 package dev.v7.photo.ui.home;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dev.v7.photo.R;
 import dev.v7.photo.databinding.FragmentHomeBinding;
+import dev.v7.photo.persistence.DBHelper;
+import dev.v7.photo.persistence.entidades.Photo;
 
 public class HomeFragment extends Fragment {
 
@@ -29,9 +35,10 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private FirebaseAuth mAuth;
     private String name;
-    private String [] arrayNombres = {"Juan Rueda","rueda","tres"};
-    private String [] arrayArrobas = {"@JuanRueda","@rueda","@tres"};
+    private List<Photo> arregloDeFotos = new ArrayList<>();
     private RecyclerView recyclerViewHome;
+    private DBHelper dbHelper;
+    private AdapterHome adapterHome;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,12 +51,13 @@ public class HomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         getUser();
-
+        dbHelper = new DBHelper(getActivity().getApplicationContext());
+        storeDataInArrays();
         binding.irAMapas.setOnClickListener(v -> {
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_mapsFragment);
         });
         recyclerViewHome = binding.recyclerViewHome;
-        AdapterHome adapterHome = new AdapterHome(getContext(),arrayNombres,arrayArrobas);
+        adapterHome = new AdapterHome(getContext(),arregloDeFotos,root);
         recyclerViewHome.setAdapter(adapterHome);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewHome.setLayoutManager(linearLayoutManager);
@@ -77,6 +85,26 @@ public class HomeFragment extends Fragment {
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
         }
+    }
+
+    private void storeDataInArrays(){
+        Cursor cursor = dbHelper.readAllData();
+        if(cursor.getCount() == 0){
+
+        }else{
+            while (cursor.moveToNext()){
+                Photo photo = new Photo(cursor.getString(0)
+                        ,cursor.getString(1)
+                        ,cursor.getString(2));
+                arregloDeFotos.add(photo);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapterHome.notifyDataSetChanged();
     }
 
     @Override

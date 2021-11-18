@@ -34,13 +34,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-356" />
-                            <option name="y" value="18" />
+                            <option name="x" value="-490" />
+                            <option name="y" value="26" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_navigation_home_to_mapsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_home_to_vistaIndividual">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -67,8 +72,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="122" />
-                            <option name="y" value="22" />
+                            <option name="x" value="223" />
+                            <option name="y" value="694" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -79,8 +84,20 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="556" />
-                            <option name="y" value="-280" />
+                            <option name="x" value="284" />
+                            <option name="y" value="-723" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="vistaIndividual">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="184" />
+                            <option name="y" value="-10" />
                           </Point>
                         </option>
                       </LayoutPositions>

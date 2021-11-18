@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_vistaIndividual"
+            app:destination="@id/vistaIndividual" />
     </fragment>
 
     <fragment
@@ -40,4 +43,14 @@
         android:name="dev.v7.photo.ui.Resumen"
         android:label="fragment_resumen"
         tools:layout="@layout/fragment_resumen" />
+
+    <fragment android:id="@+id/vistaIndividual"
+        android:name="dev.v7.photo.ui.VistaPhotoIndividualConBinding"
+        android:label="@string/editarFoto"
+        tools:layout="@layout/vista_photo_individual_con_binding_fragment">
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
