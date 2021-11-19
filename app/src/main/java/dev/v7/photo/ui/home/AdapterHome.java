@@ -49,6 +49,10 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolderHome
 
     }
 
+    public void setArregloDeFotos(List<Photo> arregloDeFotos) {
+        this.arregloDeFotos = arregloDeFotos;
+    }
+
     @Override
     public int getItemCount() {
         return arregloDeFotos.size();

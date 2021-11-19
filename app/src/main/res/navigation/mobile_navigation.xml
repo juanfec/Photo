@@ -45,7 +45,7 @@
         tools:layout="@layout/fragment_resumen" />
 
     <fragment android:id="@+id/vistaIndividual"
-        android:name="dev.v7.photo.ui.VistaPhotoIndividualConBinding"
+        android:name="dev.v7.photo.ui.PhotoIndividual.VistaPhotoIndividualConBinding"
         android:label="@string/editarFoto"
         tools:layout="@layout/vista_photo_individual_con_binding_fragment">
         <argument

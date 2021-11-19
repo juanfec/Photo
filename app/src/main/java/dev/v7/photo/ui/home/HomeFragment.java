@@ -2,6 +2,7 @@ package dev.v7.photo.ui.home;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ import dev.v7.photo.databinding.FragmentHomeBinding;
 import dev.v7.photo.persistence.DBHelper;
 import dev.v7.photo.persistence.entidades.Photo;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ToastHomeFragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
@@ -40,10 +41,12 @@ public class HomeFragment extends Fragment {
     private DBHelper dbHelper;
     private AdapterHome adapterHome;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.setToastHomeFragment(this);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -61,6 +64,11 @@ public class HomeFragment extends Fragment {
         recyclerViewHome.setAdapter(adapterHome);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewHome.setLayoutManager(linearLayoutManager);
+
+        homeViewModel.getPhotos().observe(getViewLifecycleOwner(), (Observer<List<Photo>>) photos -> {
+                    adapterHome.setArregloDeFotos(photos);
+                    adapterHome.notifyDataSetChanged();
+                });
 
         //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
         //    @Override
@@ -88,23 +96,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void storeDataInArrays(){
-        Cursor cursor = dbHelper.readAllData();
-        if(cursor.getCount() == 0){
 
-        }else{
-            while (cursor.moveToNext()){
-                Photo photo = new Photo(cursor.getString(0)
-                        ,cursor.getString(1)
-                        ,cursor.getString(2));
-                arregloDeFotos.add(photo);
-            }
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        adapterHome.notifyDataSetChanged();
+        homeViewModel.updatePhotos();
     }
 
     @Override
@@ -112,4 +110,12 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void showToast(String mensaje) {
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Log.e(mensaje,mensaje);
+    }
+
+
 }

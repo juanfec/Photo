@@ -1,4 +1,4 @@
-package dev.v7.photo.ui;
+package dev.v7.photo.ui.PhotoIndividual;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import dev.v7.photo.R;
 import dev.v7.photo.databinding.VistaPhotoIndividualConBindingFragmentBinding;
 import dev.v7.photo.persistence.DBHelper;
 import dev.v7.photo.persistence.entidades.Photo;
+import dev.v7.photo.ui.home.HomeViewModel;
 
 public class VistaPhotoIndividualConBinding extends Fragment {
 
-    private VistaPhotoIndividualConBindingViewModel mViewModel;
+    private HomeViewModel mViewModel;
     private Photo photo;
     private EditText nombre,arroba;
     private VistaPhotoIndividualConBindingFragmentBinding binding;
@@ -49,8 +49,7 @@ public class VistaPhotoIndividualConBinding extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(VistaPhotoIndividualConBindingViewModel.class);
-        // TODO: Use the ViewModel
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
     }
 
     @Override
