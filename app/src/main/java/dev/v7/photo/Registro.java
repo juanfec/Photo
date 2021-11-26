@@ -152,7 +152,7 @@ public class Registro extends AppCompatActivity {
                                         Log.d(TAG, "createUserWithEmail:success");
                                         FirebaseUser user = autentificador.getCurrentUser();
                                         String uId = user.getUid();
-                                        Usuario userCreado = new Usuario(uId,nombre,usuario);
+                                        Usuario userCreado = new Usuario(uId,nombre,usuario,"");
                                         db.collection("usuarios").add(userCreado)
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                     @Override

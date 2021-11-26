@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -46,7 +49,11 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolderHome
             bundle.putString("id", arregloDeFotos.get(position).get_id());
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_vistaIndividual,bundle);
         });
-
+        Glide.with(root)
+                .load(arregloDeFotos.get(position).getUrl())
+                .centerCrop()
+                .placeholder(R.mipmap.rectangle28)
+                .into(holder.imagen);
     }
 
     public void setArregloDeFotos(List<Photo> arregloDeFotos) {
@@ -60,11 +67,13 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolderHome
 
     public class ViewHolderHome extends RecyclerView.ViewHolder{
         public TextView  textViewNombre, textViewArroba;
+        public ImageView imagen;
         public ConstraintLayout mainLayout;
         public ViewHolderHome(@NonNull View itemView) {
             super(itemView);
             textViewNombre = itemView.findViewById(R.id.nombretarjeta);
             textViewArroba = itemView.findViewById(R.id.arrobatarjeta);
+            imagen = itemView.findViewById(R.id.imagentarjeta);
             mainLayout = itemView.findViewById(R.id.containerTarjeta);
         }
     }

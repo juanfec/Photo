@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "nombre";
     private static final String COLUMN_ARROBA = "arroba";
+    private static final String COLUMN_URL = "url";
 
 
     public DBHelper(@Nullable Context context) {
@@ -33,22 +34,29 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME_PHOTOS +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT, " +
-                COLUMN_ARROBA + " TEXT);";
+                COLUMN_ARROBA + " TEXT, " +
+                COLUMN_URL + " TEXT);";
         db.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PHOTOS);
+        String query = "CREATE TABLE " + TABLE_NAME_PHOTOS +
+                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_NAME + " TEXT, " +
+                COLUMN_ARROBA + " TEXT, " +
+                COLUMN_URL + " TEXT);";
+        db.execSQL(query);
         onCreate(db);
     }
 
-    public void addPhoto(String name, String arroba){
+    public void addPhoto(String name, String arroba, String url){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_ARROBA, arroba);
+        cv.put(COLUMN_URL,url);
         long result = db.insert(TABLE_NAME_PHOTOS,null, cv);
         if(result == -1){
             Log.d("Failed", "Failed");
@@ -73,6 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, photo.getNombre());
         cv.put(COLUMN_ARROBA, photo.getArroba());
+        cv.put(COLUMN_URL,photo.getUrl());
 
 
         long result = db.update(TABLE_NAME_PHOTOS, cv, "_id=?", new String[]{photo.get_id()});
@@ -93,5 +102,9 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    public void deleteAll(){
+        this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PHOTOS);
     }
 }

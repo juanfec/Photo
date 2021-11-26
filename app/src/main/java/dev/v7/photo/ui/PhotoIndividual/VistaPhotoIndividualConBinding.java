@@ -64,7 +64,8 @@ public class VistaPhotoIndividualConBinding extends Fragment {
                 while (cursor.moveToNext()){
                     photo = new Photo(cursor.getString(0)
                             ,cursor.getString(1)
-                            ,cursor.getString(2));
+                            ,cursor.getString(2)
+                            ,cursor.getString(3));
                 }
             }
         }

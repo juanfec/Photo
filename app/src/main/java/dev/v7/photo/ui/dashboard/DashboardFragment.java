@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,7 +96,6 @@ public class DashboardFragment extends Fragment {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data2 = baos.toByteArray();
-
                 UploadTask uploadTask = carpetaImagen.child(autentificador.getUid()).putBytes(data2);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -106,6 +107,24 @@ public class DashboardFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         // ...
+                        StorageReference imagenGuardada = taskSnapshot.getStorage();
+                        final Usuario usuario = new Usuario();
+                        db.collection("usuarios").whereEqualTo("id", autentificador.getUid()).get().addOnSuccessListener(documentSnapshot -> {
+                            Usuario usuariotemporal = documentSnapshot.getDocuments().get(0).toObject(Usuario.class);
+                            String idAEditar = documentSnapshot.getDocuments().get(0).getId();
+                            usuario.setId(usuariotemporal.getId());
+                            usuario.setCorreo(usuariotemporal.getCorreo());
+                            usuario.setNombre(usuariotemporal.getNombre());
+                            usuario.setImageUrl(usuariotemporal.getImageUrl());
+                            imagenGuardada.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    usuario.setImageUrl(uri.toString());
+                                    db.collection("usuarios").document(idAEditar).set(usuario);
+                                }
+                            });
+                        });
+
                         Snackbar.make(getActivity(),getView(),"subido con exito",Snackbar.LENGTH_LONG).show();
                     }
                 });
@@ -137,6 +156,22 @@ public class DashboardFragment extends Fragment {
                         }
                     }
                 });
+        getUserImage();
+    }
+
+
+    public void getUserImage(){
+        db.collection("usuarios").whereEqualTo("id", autentificador.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Usuario usuario = task.getResult().getDocuments().get(0).toObject(Usuario.class);
+                Glide.with(getView())
+                        .load(usuario.getImageUrl())
+                        .circleCrop()
+                        .placeholder(R.drawable.ic_group)
+                        .into(binding.photoPerfil);
+            }
+        });
     }
 
 

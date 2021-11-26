@@ -56,7 +56,8 @@ public class HomeViewModel extends AndroidViewModel {
             while (cursor.moveToNext()){
                 Photo photo = new Photo(cursor.getString(0)
                         ,cursor.getString(1)
-                        ,cursor.getString(2));
+                        ,cursor.getString(2)
+                        ,cursor.getString(3));
                 lista.add(photo);
             }
         }
@@ -73,7 +74,8 @@ public class HomeViewModel extends AndroidViewModel {
             while (cursor.moveToNext()){
                 Photo photo = new Photo(cursor.getString(0)
                         ,cursor.getString(1)
-                        ,cursor.getString(2));
+                        ,cursor.getString(2)
+                        ,cursor.getString(3));
                 lista.add(photo);
             }
         }

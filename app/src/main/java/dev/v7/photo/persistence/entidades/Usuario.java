@@ -14,14 +14,17 @@ public class Usuario {
     private String nombre;
     @NonNull
     private String correo;
+    @NonNull
+    private String imageUrl;
 
     public Usuario() {
     }
 
-    public Usuario(@NonNull String id, @NonNull String nombre, @NonNull String correo) {
+    public Usuario(@NonNull String id, @NonNull String nombre, @NonNull String correo,@NonNull String imageUrl) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
+        this.imageUrl = imageUrl;
     }
 
     @NonNull
@@ -49,5 +52,14 @@ public class Usuario {
 
     public void setCorreo(@NonNull String correo) {
         this.correo = correo;
+    }
+
+    @NonNull
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(@NonNull String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

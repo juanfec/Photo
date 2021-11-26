@@ -1,6 +1,7 @@
 package dev.v7.photo.ui.notifications;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ public class NotificationsFragment extends Fragment {
                 Toast.makeText(getContext(), "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
             }else{
                 DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
-                dbHelper.addPhoto(binding.nombreEditarSqlite.getText().toString(),binding.arrobaEditarSqlite.getText().toString());
+                dbHelper.addPhoto(binding.nombreEditarSqlite.getText().toString(),binding.arrobaEditarSqlite.getText().toString(),binding.urleditarPhoto.getText().toString());
+                Log.e("dbsave","se guardo correctamente");
             }
         });
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

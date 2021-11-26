@@ -4,19 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/button_background_withe_border_black.xml" value="0.4859375" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_group.xml" value="0.4817708333333333" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4859375" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3416666666666667" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/drawable/ic_union.xml" value="0.4817708333333333" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_bienvenida.xml" value="0.5" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_bienvenida2.xml" value="0.25" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_registro.xml" value="0.48125" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/activity_test.xml" value="0.3233695652173913" />
-        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_dashboard.xml" value="0.22" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_maps.xml" value="0.37273550724637683" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_notifications.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_resumen.xml" value="0.43976449275362317" />
+        <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_resumen.xml" value="0.16" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/fragment_vista_photo_individual.xml" value="0.33" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/tarjetaphoto.xml" value="0.5" />
         <entry key="..\:/Users/jufea/AndroidStudioProjects/Photo/app/src/main/res/layout/vista_photo_individual_con_binding_fragment.xml" value="0.246875" />
